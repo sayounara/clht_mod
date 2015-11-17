@@ -1,0 +1,12 @@
+ inline static bool cas32(void* pdst, u32 comp, u32 xchgn)
+{
+	__asm 
+	{
+	mov eax, comp;  //comp的内容放入eax，这里不是地址，即改变eax的值不会影响comp
+	mov ecx, xchgn; //将xchgn的内容放入ecx,道理同上
+	mov edx, pdst; //将pdst的内容放入edx
+
+	lock cmpxchg [edx], ecx; //相当于xchgn与pdst的比较，如果相当，edx=ecx否则eax=edx
+	setz al;
+	}
+}

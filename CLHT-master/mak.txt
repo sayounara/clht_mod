@@ -1,0 +1,4 @@
+Archive name = libclht.a
+ar -d libclht.a *
+ar -r libclht.a clht_lb_res.o clht_gc.o
+icc -mmic -I./include -I./external/include -D_GNU_SOURCE -O3 -DADD_PADDING -DDEFAULT  -Wall bmarks/test_mem.c   src/clht_lb_res.c -o clht_lb_res -L./external/lib -L. -lrt -lpthread -lm  -lclht -lssmem
